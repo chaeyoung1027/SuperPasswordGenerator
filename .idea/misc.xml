@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Mirim/Desktop/SuperPasswordGenerator/app/src/main/res/layout/activity_main.xml" value="0.17603850050658562" />
+        <entry key="..\:/Users/Mirim/Desktop/SuperPasswordGenerator/app/src/main/res/layout/activity_main.xml" value="0.1875" />
+        <entry key="..\:/Users/Mirim/Desktop/SuperPasswordGenerator/app/src/main/res/layout/password_add.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Mirim/Desktop/SuperPasswordGenerator/app/src/main/res/layout/password_generate.xml" value="0.5" />
       </map>
     </option>
   </component>

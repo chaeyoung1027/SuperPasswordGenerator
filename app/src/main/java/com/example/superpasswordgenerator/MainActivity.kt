@@ -8,10 +8,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
-    val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
-    val SaveBtn = findViewById<Button>(R.id.password_save_Btn)
 
+
+        val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
+        val SaveBtn = findViewById<Button>(R.id.password_save_Btn)
+
+        //비밀번호 생성 버튼
+        GenBtn.setOnClickListener {
+
+        }
+        //비밀번호 저장 버튼
+        SaveBtn.setOnClickListener {
+
+        }
+
+    }
 
 
 }

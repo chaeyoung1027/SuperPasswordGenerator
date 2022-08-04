@@ -9,6 +9,8 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
+
     <Button
         android:id="@+id/password_generate_Btn"
         android:layout_width="184dp"

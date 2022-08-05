@@ -15,7 +15,7 @@
         android:id="@+id/password_generate_Btn"
         android:layout_width="184dp"
         android:layout_height="wrap_content"
-        android:layout_gravity=""
+        android:layout_gravity="center"
         android:text="비밀번호 생성" />
 
     <Button

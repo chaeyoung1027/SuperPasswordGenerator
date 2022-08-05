@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         GenBtn.setOnClickListener {
             val intent = Intent(this, PasswordGenerate::class.java)
             startActivity(intent)
-
         }
+
         //비밀번호 저장 버튼
         SaveBtn.setOnClickListener {
             val intent = Intent(this, PasswordSave::class.java)

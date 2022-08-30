@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.Log
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.Slider
 
@@ -27,6 +25,7 @@ class PasswordGenerate  : AppCompatActivity(){
         val Spec5 = findViewById<CheckBox>(R.id.sh5)
         val Spec6 = findViewById<CheckBox>(R.id.sh6)
         val Spec7 = findViewById<CheckBox>(R.id.sh7)
+        val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
 
         MaxV.addOnChangeListener { slider, value, fromUser ->
             if(MaxV.value<MinV.value) {
@@ -41,6 +40,10 @@ class PasswordGenerate  : AppCompatActivity(){
             if(MaxV.value<MinV.value) {
                 MaxV.value=MinV.value
             }
+        }
+
+        GenBtn.setOnClickListener{
+
         }
 
         var i = 0

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.Slider
+import java.util.Random;
 
 
 class PasswordGenerate  : AppCompatActivity(){
@@ -17,7 +18,7 @@ class PasswordGenerate  : AppCompatActivity(){
         val SelectAll = findViewById<TextView>(R.id.select_all)
         val MaxV = findViewById<Slider>(R.id.max_v)
         val MinV = findViewById<Slider>(R.id.min_v)
-        val ResultLength = findViewById<EditText>(R.id.result)
+        val result = findViewById<TextView>(R.id.result)
         val Spec1 = findViewById<CheckBox>(R.id.sh1)
         val Spec2 = findViewById<CheckBox>(R.id.sh2)
         val Spec3 = findViewById<CheckBox>(R.id.sh3)
@@ -34,7 +35,7 @@ class PasswordGenerate  : AppCompatActivity(){
             Log.d("mytag", MinV.value.toInt().toString())
             Log.d("mytag", value.toInt().toString())
 
-            ResultLength.setFilters(arrayOf<InputFilter>(LengthFilter(value.toInt())))//MaxLength 조절하는 코드
+            result.setFilters(arrayOf<InputFilter>(LengthFilter(value.toInt())))//MaxLength 조절하는 코드
         }
         MinV.addOnChangeListener { slider, value, fromUser ->
             if(MaxV.value<MinV.value) {
@@ -42,9 +43,19 @@ class PasswordGenerate  : AppCompatActivity(){
             }
         }
 
-        GenBtn.setOnClickListener{
-
+        fun generatepassword(count: Int) : String {    //랜덤 문자열 생성 함수
+            val char = mutableListOf<Char>()
+            for(i in 1..count) char.add(('A'..'z').random())
+            return char.joinToString("")
         }
+
+        GenBtn.setOnClickListener{
+            result.text = generatepassword(10)
+        }
+
+
+
+
 
         var i = 0
         //전체 선택

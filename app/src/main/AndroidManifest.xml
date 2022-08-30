@@ -24,6 +24,9 @@
         <activity
             android:name=".PasswordSave"
             android:exported="true" />
+        <activity
+            android:name=".PasswordManage"
+            android:exported="true"/>
     </application>
 
 </manifest>

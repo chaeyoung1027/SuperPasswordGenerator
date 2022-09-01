@@ -45,12 +45,30 @@ class PasswordGenerate  : AppCompatActivity(){
 
         fun generatepassword(count: Int) : String {    //랜덤 문자열 생성 함수
             val char = mutableListOf<Char>()
-            for(i in 1..count) char.add(('A'..'z').random())
+            for(i in 1..count) {
+                char.add(('A'..'Z').random())
+                char.add(('a'..'z').random())
+                char.add('!')
+
+            }
             return char.joinToString("")
         }
 
+        fun UpperCase(){        //대문자 함수
+
+        }
+        fun LowerCase(){        //소문자 함수
+
+        }
+        fun SpecCase(){         //특수문자 함수
+
+        }
+        fun Num(){              //숫자 함수
+
+        }
+
         GenBtn.setOnClickListener{
-            result.text = generatepassword(10)
+            result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
         }
 
 

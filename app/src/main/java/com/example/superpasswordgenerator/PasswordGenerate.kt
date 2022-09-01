@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import com.google.android.material.slider.Slider
-import java.util.Random;
 
 
 class PasswordGenerate  : AppCompatActivity(){
@@ -19,13 +20,6 @@ class PasswordGenerate  : AppCompatActivity(){
         val MaxV = findViewById<Slider>(R.id.max_v)
         val MinV = findViewById<Slider>(R.id.min_v)
         val result = findViewById<TextView>(R.id.result)
-        val Spec1 = findViewById<CheckBox>(R.id.sh1)
-        val Spec2 = findViewById<CheckBox>(R.id.sh2)
-        val Spec3 = findViewById<CheckBox>(R.id.sh3)
-        val Spec4 = findViewById<CheckBox>(R.id.sh4)
-        val Spec5 = findViewById<CheckBox>(R.id.sh5)
-        val Spec6 = findViewById<CheckBox>(R.id.sh6)
-        val Spec7 = findViewById<CheckBox>(R.id.sh7)
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
 
         MaxV.addOnChangeListener { slider, value, fromUser ->
@@ -54,51 +48,27 @@ class PasswordGenerate  : AppCompatActivity(){
             return char.joinToString("")
         }
 
-        fun UpperCase(){        //대문자 함수
-
-        }
-        fun LowerCase(){        //소문자 함수
-
-        }
-        fun SpecCase(){         //특수문자 함수
-
-        }
-        fun Num(){              //숫자 함수
-
-        }
-
         GenBtn.setOnClickListener{
             result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
         }
 
 
+        //특수문자 전체 선택
+        var checked = false
 
+        // 1.
+        val spec = findViewById<LinearLayout>(R.id.sh)
 
+        SelectAll.setOnClickListener {
+            checked = !checked
 
-        var i = 0
-        //전체 선택
-        SelectAll.setOnClickListener{
-            if(i%2==0){
-                Spec1.isChecked = true
-                Spec2.isChecked = true
-                Spec3.isChecked = true
-                Spec4.isChecked = true
-                Spec5.isChecked = true
-                Spec6.isChecked = true
-                Spec7.isChecked = true
+            for (i in 1 until spec.childCount) {
+                val checkBox = spec.getChildAt(i) as CheckBox
+                checkBox.isChecked = checked
             }
-            else{
-                Spec1.isChecked = false
-                Spec2.isChecked = false
-                Spec3.isChecked = false
-                Spec4.isChecked = false
-                Spec5.isChecked = false
-                Spec6.isChecked = false
-                Spec7.isChecked = false
-            }
+        }
+
             //checkbox를 List로 바꿀 수 있는지
             //전체 선택을 전체 취소로 바꿀 수 있는지(하나라도 false면)
-            i++
-        }
     }
 }

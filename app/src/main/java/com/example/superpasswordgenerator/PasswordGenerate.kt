@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class PasswordGenerate  : AppCompatActivity(){
         val MinV = findViewById<Slider>(R.id.min_v)
         val result = findViewById<TextView>(R.id.result)
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
+        val SavePassword = findViewById<Button>(R.id.password_save_Btn)
 
         MaxV.addOnChangeListener { slider, value, fromUser ->
             if(MaxV.value<MinV.value) {
@@ -50,6 +52,7 @@ class PasswordGenerate  : AppCompatActivity(){
 
         GenBtn.setOnClickListener{
             result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
+            SavePassword.visibility = View.VISIBLE
         }
 
 

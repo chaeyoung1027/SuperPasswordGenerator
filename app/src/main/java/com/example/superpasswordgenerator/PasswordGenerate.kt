@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.google.android.material.slider.Slider
 
-
 class PasswordGenerate  : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +22,14 @@ class PasswordGenerate  : AppCompatActivity(){
         val result = findViewById<TextView>(R.id.result)
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
         val SavePassword = findViewById<Button>(R.id.password_save_Btn)
+        val rg = findViewById<RadioGroup>(R.id.rg)
+        var Upperlist = listOf("A","B","C","D","E","F","G","H","I","J","K","L","N","M","O","P","Q","R","S","T","U", "V", "W", "X", "Y", "Z")
+        var Lowerlist = listOf("a", "b", "c", "d", "e", "f", "g","h", "i", "j","k","l","m","n","o","p","q",'r',"s", "t", "u", "v", "w", "x", "y", "z")
+        var SpecChar = listOf("!", "@", "#", "$","^","&","*")
+        var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
+        val passArray = ArrayList<Int>()
 
-        MaxV.addOnChangeListener { slider, value, fromUser ->
+        MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
             if(MaxV.value<MinV.value) {
                 MinV.value=MaxV.value
             }
@@ -39,6 +44,23 @@ class PasswordGenerate  : AppCompatActivity(){
             }
         }
 
+        var mode = "all"
+
+        rg.setOnCheckedChangeListener { group, checkedId -> //영어 포함 Radio 버튼 값을 받기
+            when(checkedId){
+                R.id.all -> {
+                    mode = "all"
+                }
+                R.id.upper ->{
+                    mode = "upper"
+                }
+                R.id.small ->{
+                    mode = "small"
+                }
+
+            }
+        }
+
         fun generatepassword(count: Int) : String {    //랜덤 문자열 생성 함수
             val char = mutableListOf<Char>()
             for(i in 1..count) {
@@ -50,7 +72,7 @@ class PasswordGenerate  : AppCompatActivity(){
             return char.joinToString("")
         }
 
-        GenBtn.setOnClickListener{
+        GenBtn.setOnClickListener{  //비밀번호 길이
             result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
             SavePassword.visibility = View.VISIBLE
         }
@@ -59,7 +81,6 @@ class PasswordGenerate  : AppCompatActivity(){
         //특수문자 전체 선택
         var checked = false
 
-        // 1.
         val spec = findViewById<LinearLayout>(R.id.sh)
 
         SelectAll.setOnClickListener {
@@ -71,8 +92,5 @@ class PasswordGenerate  : AppCompatActivity(){
             }
         }
 
-        var Upperlist = listOf("A","B","C","D","E","F","G","H","I","J","K","L","N","M","O","P","Q","R","S","T","U", "V", "W", "X", "Y", "Z")
-        var Lowerlist = listOf("a", "b", "c", "d", "e", "f", "g","h", "i", "j","k","l","m","n","o","p","q",'r',"s", "t", "u", "v", "w", "x", "y", "z")
-        var SpecChar = listOf("!", "@", "#", "$","^","&","*")
     }
 }

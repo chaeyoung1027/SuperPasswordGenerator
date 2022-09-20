@@ -10,6 +10,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.google.android.material.slider.Slider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class PasswordGenerate  : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,9 @@ class PasswordGenerate  : AppCompatActivity(){
         var SpecChar = listOf("!", "@", "#", "$","^","&","*")
         var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
         val passArray = ArrayList<Int>()
+
+        val db = Firebase.firestore
+        //TODO: 저장 버튼 누르면 데이터 저장하기, 저장소에 데이터 읽어오기
 
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
             if(MaxV.value<MinV.value) {

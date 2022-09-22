@@ -10,13 +10,18 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import com.google.android.material.slider.Slider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
+private lateinit var database: DatabaseReference
 
 class PasswordGenerate  : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
+
         Log.d("mytag", "??")
         val SelectAll = findViewById<TextView>(R.id.select_all)
         val MaxV = findViewById<Slider>(R.id.max_v)
@@ -31,7 +36,7 @@ class PasswordGenerate  : AppCompatActivity(){
         var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
         val passArray = ArrayList<Int>()
 
-        val db = Firebase.firestore
+        database = Firebase.database.reference
         //TODO: 저장 버튼 누르면 데이터 저장하기, 저장소에 데이터 읽어오기
 
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
@@ -95,6 +100,10 @@ class PasswordGenerate  : AppCompatActivity(){
                 val checkBox = spec.getChildAt(i) as CheckBox
                 checkBox.isChecked = checked
             }
+        }
+
+        SavePassword.setOnClickListener {
+
         }
 
     }

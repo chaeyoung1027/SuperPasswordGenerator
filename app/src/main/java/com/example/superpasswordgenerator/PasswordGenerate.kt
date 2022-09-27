@@ -1,5 +1,6 @@
 package com.example.superpasswordgenerator
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -103,7 +104,8 @@ class PasswordGenerate  : AppCompatActivity(){
         }
 
         SavePassword.setOnClickListener {
-
+            val intent = Intent(this, PasswordManage::class.java)
+            startActivity(intent)
         }
 
     }

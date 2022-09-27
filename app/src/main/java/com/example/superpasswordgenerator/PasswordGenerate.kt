@@ -110,6 +110,7 @@ class PasswordGenerate  : AppCompatActivity(){
 
         SavePassword.setOnClickListener {
             val intent = Intent(this, PasswordManage::class.java)
+            intent.putExtra("password", result.text.toString())
             startActivity(intent)
         }
 

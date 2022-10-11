@@ -6,15 +6,12 @@ import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
+import android.widget.GridLayout.spec
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
+import androidx.core.view.get
 import com.google.android.material.slider.Slider
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 private lateinit var database: DatabaseReference
 
@@ -30,18 +27,17 @@ class PasswordGenerate  : AppCompatActivity(){
         val result = findViewById<TextView>(R.id.result)
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
         val SavePassword = findViewById<Button>(R.id.password_save_Btn)
+        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)
         val rg = findViewById<RadioGroup>(R.id.rg)
         var Upperlist = listOf("A","B","C","D","E","F","G","H","I","J","K","L","N","M","O","P","Q","R","S","T","U", "V", "W", "X", "Y", "Z")
-        var Lowerlist = listOf("a", "b", "c", "d", "e", "f", "g","h", "i", "j","k","l","m","n","o","p","q",'r',"s", "t", "u", "v", "w", "x", "y", "z")
+        var Lowerlist = listOf("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z")
         var SpecChar = listOf("!", "@", "#", "$","^","&","*")
         var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
         val passArray = ArrayList<String>()
 
-        database = Firebase.database.reference
-        //TODO: 저장 버튼 누르면 데이터 저장하기, 저장소에 데이터 읽어오기
+        //특수문자 받아서 리스트에 넣기
 
-        //Log.d("mytag", passArray.random())
-
+        //최대글자 최소글자
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
             if(MaxV.value<MinV.value) {
                 MinV.value=MaxV.value
@@ -60,11 +56,13 @@ class PasswordGenerate  : AppCompatActivity(){
 
         var mode = "all"
 
+        //영어 포함
         rg.setOnCheckedChangeListener { group, checkedId -> //영어 포함 Radio 버튼 값을 받기
             when(checkedId){
                 R.id.all -> {
                     mode = "all"
                     passArray.addAll(Upperlist)
+                    passArray.addAll(Lowerlist)
                 }
                 R.id.upper ->{
                     mode = "upper"
@@ -72,18 +70,23 @@ class PasswordGenerate  : AppCompatActivity(){
                 }
                 R.id.lower ->{
                     mode = "lower"
+                    passArray.addAll(Lowerlist)
                 }
 
             }
         }
 
+        if (NumberCheck.isChecked)passArray.addAll(Number)
+
+        NumberCheck.setOnClickListener { view ->
+
+        }
         fun generatepassword(count: Int) : String {    //랜덤 문자열 생성 함수
             val char = mutableListOf<Char>()
             for(i in 1..count) {
                 char.add(('A'..'Z').random())
                 char.add(('a'..'z').random())
                 char.add('!')
-
             }
             return char.joinToString("")
         }
@@ -106,6 +109,11 @@ class PasswordGenerate  : AppCompatActivity(){
                 val checkBox = spec.getChildAt(i) as CheckBox
                 checkBox.isChecked = checked
             }
+
+        }
+        for (i in 0 until spec.childCount) {
+            if(spec.getChildAt(i).isChecked)
+                passArray.addAll(SpecChar(i))
         }
 
         SavePassword.setOnClickListener {

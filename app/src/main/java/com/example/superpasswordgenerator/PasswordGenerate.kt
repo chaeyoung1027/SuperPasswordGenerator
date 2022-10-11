@@ -35,7 +35,6 @@ class PasswordGenerate  : AppCompatActivity(){
         var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
         val passArray = ArrayList<String>()
 
-        //특수문자 받아서 리스트에 넣기
 
         //최대글자 최소글자
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
@@ -112,8 +111,8 @@ class PasswordGenerate  : AppCompatActivity(){
 
         }
         for (i in 0 until spec.childCount) {
-            if(spec.getChildAt(i).isChecked)
-                passArray.addAll(SpecChar(i))
+            if((spec.getChildAt(i) as CheckBox).isChecked)
+                passArray.add(SpecChar[i])
         }
 
         SavePassword.setOnClickListener {

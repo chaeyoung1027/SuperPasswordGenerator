@@ -10,6 +10,7 @@ import android.widget.*
 import android.widget.GridLayout.spec
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.Slider
 import com.google.firebase.database.DatabaseReference
 
@@ -110,7 +111,7 @@ class PasswordGenerate  : AppCompatActivity(){
             }
 
         }
-        for (i in 0 until spec.childCount) {
+        for (i in 1 until spec.childCount) {
             if((spec.getChildAt(i) as CheckBox).isChecked)
                 passArray.add(SpecChar[i])
         }

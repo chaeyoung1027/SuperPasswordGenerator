@@ -37,16 +37,18 @@ class PasswordManage : AppCompatActivity(){
                 .addOnSuccessListener { Log.d("mytag", "DocumentSnapshot successfully written!") }
                 .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
 
-
-
-            /*
-            val edit_site = site.text.toString()
-            val pref = getSharedPreferences("password", Context.MODE_PRIVATE)
-            val editor = pref.edit()
-            editor.putString("site", edit_site)
-            editor.apply()
-
-            Log.d("mytag", editor.toString())*/
+            val docRef = db.collection("passwords").document(siteURL + "#" + id.text.toString())
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        Log.d("mytag", "DocumentSnapshot data: ${document.data}")
+                    } else {
+                        Log.d("mytag", "No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.d("mytag", "get failed with ", exception)
+                }
 
         }
 

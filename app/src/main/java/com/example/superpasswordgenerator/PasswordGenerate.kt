@@ -7,12 +7,11 @@ import android.text.InputFilter.LengthFilter
 import android.util.Log
 import android.view.View
 import android.widget.*
-import android.widget.GridLayout.spec
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.Slider
 import com.google.firebase.database.DatabaseReference
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 private lateinit var database: DatabaseReference
 
@@ -81,21 +80,6 @@ class PasswordGenerate  : AppCompatActivity(){
         NumberCheck.setOnClickListener { view ->
 
         }
-        fun generatepassword(count: Int) : String {    //랜덤 문자열 생성 함수
-            val char = mutableListOf<Char>()
-            for(i in 1..count) {
-                char.add(('A'..'Z').random())
-                char.add(('a'..'z').random())
-                char.add('!')
-            }
-            return char.joinToString("")
-        }
-
-        GenBtn.setOnClickListener{  //비밀번호 길이
-            result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
-            SavePassword.visibility = View.VISIBLE
-        }
-
 
         //특수문자 전체 선택
         var checked = false
@@ -114,6 +98,22 @@ class PasswordGenerate  : AppCompatActivity(){
         for (i in 1 until spec.childCount) {
             if((spec.getChildAt(i) as CheckBox).isChecked)
                 passArray.add(SpecChar[i])
+        }
+        var passlength  = Random().nextInt(Max)
+            //(MinV..MaxV).map { Random().nextInt() }   //글자 수 정하기
+
+        fun generatepassword(passlength: Int) : String {    //랜덤 문자열 생성 함수
+            val char = mutableListOf<Char>()
+            for(i in 1..passlength) {
+                val randomNumber = passArray.random()
+                char.add(randomNumber.toCharArray())
+            }
+            return char.joinToString("")
+        }
+
+        GenBtn.setOnClickListener{  //비밀번호 길이
+            result.text = generatepassword(10)  //TODO : 글자 수 받아서 변환되게 하기
+            SavePassword.visibility = View.VISIBLE
         }
 
         SavePassword.setOnClickListener {

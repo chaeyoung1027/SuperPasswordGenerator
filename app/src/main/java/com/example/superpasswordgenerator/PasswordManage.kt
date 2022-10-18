@@ -49,6 +49,9 @@ class PasswordManage : AppCompatActivity(){
                 .addOnFailureListener { exception ->
                     Log.d("mytag", "get failed with ", exception)
                 }
+            val intent = Intent(this, PasswordSave::class.java)
+            intent.putExtra("password", docRef.toString())
+            startActivity(intent)
 
         }
 

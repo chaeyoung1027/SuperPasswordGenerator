@@ -19,11 +19,11 @@ private lateinit var database: DatabaseReference
 class PasswordGenerator {
 
     //PassArray 배열 만들기
-    fun feed(ingredient: List<String>) :String{
+    fun feed(ingredient: List<String>) :ArrayList<String>{
         val passArray = ArrayList<String>()
         passArray.addAll(ingredient)
 
-        return passArray.joinToString("")
+        return passArray
     }
 
     //비밀번호 길이 랜덤으로 설정
@@ -36,6 +36,9 @@ class PasswordGenerator {
 
     fun generatepassword(length: Int, passArray:List<String>): String {    //랜덤 문자열 생성 함수
         val char = mutableListOf<String>()
+        if(passArray==null){
+            return ""
+        }
         for(i in 1..length) {
             val randomNumber = passArray.random()
             char.add(randomNumber)
@@ -49,7 +52,6 @@ class PasswordGenerate  : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
 
-        Log.d("mytag", "??")
         val SelectAll = findViewById<TextView>(R.id.select_all)
         val MaxV = findViewById<Slider>(R.id.max_v)
         val MinV = findViewById<Slider>(R.id.min_v)
@@ -62,6 +64,7 @@ class PasswordGenerate  : AppCompatActivity(){
         var Lowerlist = listOf("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z")
         var SpecChar = listOf("!", "@", "#", "$","^","&","*")
         var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
+        var passArray = ArrayList<String>()
 
         val generator = PasswordGenerator()
         generator.feed(Upperlist)
@@ -88,7 +91,7 @@ class PasswordGenerate  : AppCompatActivity(){
         }
 
         //숫자추가
-        if (NumberCheck.isChecked)generator.feed(Number)
+        if (NumberCheck.isChecked) generator.feed(Number)
 
         //문자추가
 
@@ -129,16 +132,14 @@ class PasswordGenerate  : AppCompatActivity(){
             }
         }
 
+
+        passArray = generator.feed(passArray)
         val length = generator.length(MinV.value.toInt(), MaxV.value.toInt())   //비밀번호의 길이
 
         GenBtn.setOnClickListener{  //비밀번호 길이
-            result.text =  generator.generatepassword(length, passArray) //TODO : 글자 수 받아서 변환되게 하기
-            // result.text = generatepassword(10)
+            result.text =  generator.generatepassword(10, passArray) //TODO : 글자 수 받아서 변환되게 하기
             SavePassword.visibility = View.VISIBLE
         }
-
-
-
 
 
         SavePassword.setOnClickListener {

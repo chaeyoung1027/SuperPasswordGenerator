@@ -1,4 +1,3 @@
 package com.example.superpasswordgenerator
 
-class Save(val site: String, val password: String) {
-}
+data class Save(val password: String, val site: String, val id: String) { }

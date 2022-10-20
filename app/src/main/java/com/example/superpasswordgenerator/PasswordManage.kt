@@ -50,7 +50,9 @@ class PasswordManage : AppCompatActivity(){
                     Log.d("mytag", "get failed with ", exception)
                 }
             val intent = Intent(this, PasswordSave::class.java)
-            intent.putExtra("password", docRef.toString())
+            intent.putExtra("password",password.text.toString())
+            intent.putExtra("site",siteURL)
+            intent.putExtra("id",id.text.toString())
             startActivity(intent)
 
         }

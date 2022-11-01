@@ -26,9 +26,9 @@ class PasswordGenerator {
     }
 
     //비밀번호 길이 정하기
-    fun length(Max:Int, Min:Int):Int{
-        //val Max= Max
-        //val Min= Min
+    fun pass_length(Max:Int, Min:Int):Int{
+        val Max= Max
+        val Min= Min
 
         return (Min..Max).random()
     }
@@ -59,9 +59,6 @@ class PasswordGenerator {
 class PasswordGenerate  : AppCompatActivity(){
     private val generator = PasswordGenerator()
 
-    val MaxV = findViewById<Slider>(R.id.max_v)
-    val MinV = findViewById<Slider>(R.id.min_v)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
@@ -70,23 +67,31 @@ class PasswordGenerate  : AppCompatActivity(){
         generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
         generator.feed(PasswordGenerator.DIGITS)
 
+        val MaxV = findViewById<Slider>(R.id.max_v)                     //비밀번호 길이(Max)
+        val MinV = findViewById<Slider>(R.id.min_v)                     //비밀번호 길이(Min)
+        val result = findViewById<TextView>(R.id.result)                //결과를 보여주는 칸
+        val GenBtn = findViewById<Button>(R.id.password_generate_Btn)   //생성하기 버튼
+        val SavePassword = findViewById<Button>(R.id.password_save_Btn) //저장하기 버튼
+        val SelectAll = findViewById<TextView>(R.id.select_all)         //특수문자 전체 선택
 
-        /*
-        val SelectAll = findViewById<TextView>(R.id.select_all)
-        val result = findViewById<TextView>(R.id.result)
-        val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
-        val SavePassword = findViewById<Button>(R.id.password_save_Btn)
-        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)
-        val rg = findViewById<RadioGroup>(R.id.rg)
-        var SpecChar = listOf("!", "@", "#", "$","^","&","*")
-        var passArray = ArrayList<String>()
+        //최대글자 최소글자
+        MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
+            if(MaxV.value<MinV.value) {
+                MinV.value=MaxV.value
+            }
+            result.setFilters(arrayOf<InputFilter>(LengthFilter(value.toInt())))    //MaxLength 조절하는 코드
+        }
+        MinV.addOnChangeListener { slider, value, fromUser ->
+            if(MaxV.value<MinV.value) {
+                MaxV.value=MinV.value
+            }
+        }
 
-        val generator = PasswordGenerator()
-
-
-        //문자추가
-
-
+        //생성하기 버튼
+        GenBtn.setOnClickListener{
+            result.text = generator.generate(generator.pass_length(MaxV.value.toInt(), MinV.value.toInt()))
+            SavePassword.visibility = View.VISIBLE
+        }
 
         //특수문자 전체 선택
         var checked = false
@@ -103,41 +108,32 @@ class PasswordGenerate  : AppCompatActivity(){
         }
 
 
+
+        /*
+        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)
+        val rg = findViewById<RadioGroup>(R.id.rg)
+        var SpecChar = listOf("!", "@", "#", "$","^","&","*")
+        var passArray = ArrayList<String>()
+
+        val generator = PasswordGenerator()
+
+
+        //문자추가
+
+
+
+
+
         for (i in 1 until spec.childCount) {
             if((spec.getChildAt(i) as CheckBox).isChecked)
                 passArray.add(SpecChar[i])
         }
-
-
-        //최대글자 최소글자
-        MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
-            if(MaxV.value<MinV.value) {
-                MinV.value=MaxV.value
-            }
-
-            result.setFilters(arrayOf<InputFilter>(LengthFilter(value.toInt())))//MaxLength 조절하는 코드
-        }
-        MinV.addOnChangeListener { slider, value, fromUser ->
-            if(MaxV.value<MinV.value) {
-                MaxV.value=MinV.value
-            }
-        }
-
-
-        passArray = generator.feed(passArray)
-        val length = generator.length(MinV.value.toInt(), MaxV.value.toInt())   //비밀번호의 길이
-
-        GenBtn.setOnClickListener{  //비밀번호 길이
-            result.text =  generator.generatepassword(10, passArray) //TODO : 글자 수 받아서 변환되게 하기
-            SavePassword.visibility = View.VISIBLE
-        }
-
+        */
 
         SavePassword.setOnClickListener {
             val intent = Intent(this, PasswordManage::class.java)
             intent.putExtra("password", result.text.toString())
             startActivity(intent)
         }
-        */
     }
 }

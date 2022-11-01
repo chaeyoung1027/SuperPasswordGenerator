@@ -53,6 +53,7 @@ class PasswordGenerator {
         val ALPHABET_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         val ALPHABET_LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
         val DIGITS = "0123456789"
+        val SPECIAL_CHAR = "!@#$^&*"
     }
 }
 
@@ -67,12 +68,15 @@ class PasswordGenerate  : AppCompatActivity(){
         generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
         generator.feed(PasswordGenerator.DIGITS)
 
+
         val MaxV = findViewById<Slider>(R.id.max_v)                     //비밀번호 길이(Max)
         val MinV = findViewById<Slider>(R.id.min_v)                     //비밀번호 길이(Min)
         val result = findViewById<TextView>(R.id.result)                //결과를 보여주는 칸
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)   //생성하기 버튼
         val SavePassword = findViewById<Button>(R.id.password_save_Btn) //저장하기 버튼
         val SelectAll = findViewById<TextView>(R.id.select_all)         //특수문자 전체 선택
+        val rg = findViewById<RadioGroup>(R.id.rg)                      //영어 포함 여부 Radio 버튼
+        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)      //숫자 포함 여부 CheckBox
 
         //최대글자 최소글자
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
@@ -107,22 +111,37 @@ class PasswordGenerate  : AppCompatActivity(){
 
         }
 
+        //영어 추가하기
+        var mode = "all"
+        rg.setOnCheckedChangeListener { group, checkedId -> //영어 포함 Radio 버튼 값을 받기
+            when(checkedId){
+                R.id.all -> {
+                    mode = "all"
+                    generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
+                    generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
+                }
+                R.id.upper ->{
+                    mode = "upper"
+                    generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
+                }
+                R.id.lower ->{
+                    mode = "lower"
+                    generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
+                }
+            }
+        }
 
+        //숫자 추가하기
+        if (NumberCheck.isChecked) generator.feed(PasswordGenerator.DIGITS)
 
         /*
-        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)
-        val rg = findViewById<RadioGroup>(R.id.rg)
-        var SpecChar = listOf("!", "@", "#", "$","^","&","*")
+        var SpecChar = listOf()
         var passArray = ArrayList<String>()
 
         val generator = PasswordGenerator()
 
 
         //문자추가
-
-
-
-
 
         for (i in 1 until spec.childCount) {
             if((spec.getChildAt(i) as CheckBox).isChecked)
@@ -137,3 +156,6 @@ class PasswordGenerate  : AppCompatActivity(){
         }
     }
 }
+
+//TODO : 설정이 바뀌면 clear()후 처음부터 다시 추가하기
+//TODO : 특수문자 추가하기

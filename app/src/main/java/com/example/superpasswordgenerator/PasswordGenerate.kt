@@ -12,86 +12,77 @@ import com.google.android.material.slider.Slider
 import com.google.firebase.database.DatabaseReference
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 import kotlin.random.Random.Default.nextInt
 
 private lateinit var database: DatabaseReference
 
 class PasswordGenerator {
+    private var characterSet: MutableSet<Char> = mutableSetOf()
 
-    //PassArray 배열 만들기
-    fun feed(ingredient: List<String>) :ArrayList<String>{
-        val passArray = ArrayList<String>()
-        passArray.addAll(ingredient)
-
-        return passArray
+    //문자열 추가하기
+    fun feed(ingredients: String) {
+        for(c in ingredients) characterSet.add(c)
     }
 
-    //비밀번호 길이 랜덤으로 설정
+    //비밀번호 길이 정하기
     fun length(Max:Int, Min:Int):Int{
-        val Max= Max
-        val Min= Min
+        //val Max= Max
+        //val Min= Min
 
         return (Min..Max).random()
     }
 
-    fun generatepassword(length: Int, passArray:List<String>): String {    //랜덤 문자열 생성 함수
-        val char = mutableListOf<String>()
-        if(passArray==null){
-            return ""
+    //비밀번호 만들기
+    fun generate(length: Int): String {
+        var result = ""
+        for(i in 0 until length) {
+            result += characterSet.random()
         }
-        for(i in 1..length) {
-            val randomNumber = passArray.random()
-            char.add(randomNumber)
-        }
-        return char.joinToString("")
+        return result
+    }
+
+    //characterSet 초기화 하기
+    fun clear() {
+        // characterSet = mutableSetOf()
+        characterSet.clear()
+    }
+
+    //클래스 상수
+    companion object {
+        val ALPHABET_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        val ALPHABET_LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
+        val DIGITS = "0123456789"
     }
 }
 
 class PasswordGenerate  : AppCompatActivity(){
+    private val generator = PasswordGenerator()
+
+    val MaxV = findViewById<Slider>(R.id.max_v)
+    val MinV = findViewById<Slider>(R.id.min_v)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
 
+        generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
+        generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
+        generator.feed(PasswordGenerator.DIGITS)
+
+
+        /*
         val SelectAll = findViewById<TextView>(R.id.select_all)
-        val MaxV = findViewById<Slider>(R.id.max_v)
-        val MinV = findViewById<Slider>(R.id.min_v)
         val result = findViewById<TextView>(R.id.result)
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)
         val SavePassword = findViewById<Button>(R.id.password_save_Btn)
         var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)
         val rg = findViewById<RadioGroup>(R.id.rg)
-        var Upperlist = listOf("A","B","C","D","E","F","G","H","I","J","K","L","N","M","O","P","Q","R","S","T","U", "V", "W", "X", "Y", "Z")
-        var Lowerlist = listOf("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z")
         var SpecChar = listOf("!", "@", "#", "$","^","&","*")
-        var Number = listOf("1", "2", "3", "4", "5", "6","7","8","9","0")
         var passArray = ArrayList<String>()
 
         val generator = PasswordGenerator()
-        generator.feed(Upperlist)
 
-        //영어 추가
-        var mode = "all"
-        rg.setOnCheckedChangeListener { group, checkedId -> //영어 포함 Radio 버튼 값을 받기
-            when(checkedId){
-                R.id.all -> {
-                    mode = "all"
-                    generator.feed(Upperlist)
-                    generator.feed(Lowerlist)
-                }
-                R.id.upper ->{
-                    mode = "upper"
-                    generator.feed(Upperlist)
-                }
-                R.id.lower ->{
-                    mode = "lower"
-                    generator.feed(Lowerlist)
-                }
-
-            }
-        }
-
-        //숫자추가
-        if (NumberCheck.isChecked) generator.feed(Number)
 
         //문자추가
 
@@ -147,6 +138,6 @@ class PasswordGenerate  : AppCompatActivity(){
             intent.putExtra("password", result.text.toString())
             startActivity(intent)
         }
-
+        */
     }
 }

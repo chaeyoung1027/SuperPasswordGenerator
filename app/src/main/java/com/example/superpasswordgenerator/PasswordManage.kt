@@ -51,7 +51,7 @@ class PasswordManage : AppCompatActivity(){
                 }
             val intent = Intent(this, PasswordSave::class.java)
             intent.putExtra("password",password.text.toString())
-            intent.putExtra("site",siteURL)
+            intent.putExtra("site",site.text.toString())
             intent.putExtra("id",id.text.toString())
             startActivity(intent)
 

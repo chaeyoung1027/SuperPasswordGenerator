@@ -10,10 +10,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.slider.Slider
 import com.google.firebase.database.DatabaseReference
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
-import kotlin.random.Random.Default.nextInt
 
 private lateinit var database: DatabaseReference
 
@@ -23,14 +19,6 @@ class PasswordGenerator {
     //문자열 추가하기
     fun feed(ingredients: String) {
         for(c in ingredients) characterSet.add(c)
-    }
-
-    //비밀번호 길이 정하기
-    fun pass_length(Max:Int, Min:Int):Int{
-        val Max= Max
-        val Min= Min
-
-        return (Min..Max).random()
     }
 
     //비밀번호 만들기
@@ -53,25 +41,55 @@ class PasswordGenerator {
         val ALPHABET_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         val ALPHABET_LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
         val DIGITS = "0123456789"
-        val SPECIAL_CHAR = "!@#$^&*"
     }
 }
 
 class PasswordGenerate  : AppCompatActivity(){
     private val generator = PasswordGenerator()
+    lateinit var MaxV : Slider
+    lateinit var MinV : Slider
+    lateinit var rg : RadioGroup
+    lateinit var spec: LinearLayout
+    lateinit var NumberCheck: CheckBox
+    lateinit var result: TextView
+
+    fun generatePassword() {
+        generator.clear()
+        val len = (MinV.value.toInt()..MaxV.value.toInt()).random()
+        Log.d("mytag", len.toString())
+        when(rg.checkedRadioButtonId) {
+            R.id.all -> {
+                generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
+                generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
+            }
+            R.id.lower -> {
+                generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
+            }
+            R.id.upper -> {
+                generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
+            }
+        }
+        for (i in 1 until spec.childCount) {
+            val checkBox = spec.getChildAt(i) as CheckBox
+            if(checkBox.isChecked) generator.feed(checkBox.text.toString())
+        }
+        if(NumberCheck.isChecked) generator.feed(PasswordGenerator.DIGITS)
+        val password = generator.generate(len)
+        result.text = password
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
 
-        val MaxV = findViewById<Slider>(R.id.max_v)                     //비밀번호 길이(Max)
-        val MinV = findViewById<Slider>(R.id.min_v)                     //비밀번호 길이(Min)
-        val result = findViewById<TextView>(R.id.result)                //결과를 보여주는 칸
+        MaxV = findViewById<Slider>(R.id.max_v)                     //비밀번호 길이(Max)
+        MinV = findViewById<Slider>(R.id.min_v)                     //비밀번호 길이(Min)
+        result = findViewById<TextView>(R.id.result)                //결과를 보여주는 칸
         val GenBtn = findViewById<Button>(R.id.password_generate_Btn)   //생성하기 버튼
         val SavePassword = findViewById<Button>(R.id.password_save_Btn) //저장하기 버튼
         val SelectAll = findViewById<TextView>(R.id.select_all)         //특수문자 전체 선택
-        val rg = findViewById<RadioGroup>(R.id.rg)                      //영어 포함 여부 Radio 버튼
-        var NumberCheck = findViewById<CheckBox>(R.id.numbercheck)      //숫자 포함 여부 CheckBox
+        rg = findViewById<RadioGroup>(R.id.rg)                      //영어 포함 여부 Radio 버튼
+        NumberCheck = findViewById<CheckBox>(R.id.numbercheck)      //숫자 포함 여부 CheckBox
 
         //최대글자 최소글자
         MaxV.addOnChangeListener { slider, value, fromUser ->   //최소글자가 최대글자를 넘어가면 최대글자도 늘어남, 최대글자가 줄어들어도 같다
@@ -88,14 +106,14 @@ class PasswordGenerate  : AppCompatActivity(){
 
         //생성하기 버튼
         GenBtn.setOnClickListener{
-            result.text = generator.generate(generator.pass_length(MaxV.value.toInt(), MinV.value.toInt()))
             SavePassword.visibility = View.VISIBLE
+            generatePassword()
         }
 
         //특수문자 전체 선택
         var checked = false
 
-        val spec = findViewById<LinearLayout>(R.id.sh)
+        spec = findViewById<LinearLayout>(R.id.sh)
 
         SelectAll.setOnClickListener {
             checked = !checked
@@ -103,55 +121,7 @@ class PasswordGenerate  : AppCompatActivity(){
                 val checkBox = spec.getChildAt(i) as CheckBox
                 checkBox.isChecked = checked
             }
-
         }
-
-        //영어 추가하기
-        var mode = "all"
-        rg.setOnCheckedChangeListener { group, checkedId -> //영어 포함 Radio 버튼 값을 받기
-            when(checkedId){
-                R.id.all -> {
-                    mode = "all"
-                    generator.clear()
-                    generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
-                    generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
-                }
-                R.id.upper ->{
-                    mode = "upper"
-                    generator.clear()
-                    generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
-                }
-                R.id.lower ->{
-                    mode = "lower"
-                    generator.clear()
-                    generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
-                }
-            }
-        }
-
-        //숫자 추가하기
-        NumberCheck.setOnClickListener{
-            if (NumberCheck.isChecked) generator.feed(PasswordGenerator.DIGITS)
-            else {
-                generator.clear()
-                //영어 체크해서 넣어주기
-            }
-        }
-
-        /*
-        var SpecChar = listOf()
-        var passArray = ArrayList<String>()
-
-        val generator = PasswordGenerator()
-
-
-        //문자추가
-
-        for (i in 1 until spec.childCount) {
-            if((spec.getChildAt(i) as CheckBox).isChecked)
-                passArray.add(SpecChar[i])
-        }
-        */
 
         SavePassword.setOnClickListener {
             val intent = Intent(this, PasswordManage::class.java)

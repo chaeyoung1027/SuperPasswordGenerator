@@ -64,11 +64,6 @@ class PasswordGenerate  : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_generate)
 
-        generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
-        generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
-        generator.feed(PasswordGenerator.DIGITS)
-
-
         val MaxV = findViewById<Slider>(R.id.max_v)                     //비밀번호 길이(Max)
         val MinV = findViewById<Slider>(R.id.min_v)                     //비밀번호 길이(Min)
         val result = findViewById<TextView>(R.id.result)                //결과를 보여주는 칸
@@ -117,22 +112,31 @@ class PasswordGenerate  : AppCompatActivity(){
             when(checkedId){
                 R.id.all -> {
                     mode = "all"
+                    generator.clear()
                     generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
                     generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
                 }
                 R.id.upper ->{
                     mode = "upper"
+                    generator.clear()
                     generator.feed(PasswordGenerator.ALPHABET_UPPERCASE)
                 }
                 R.id.lower ->{
                     mode = "lower"
+                    generator.clear()
                     generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)
                 }
             }
         }
 
         //숫자 추가하기
-        if (NumberCheck.isChecked) generator.feed(PasswordGenerator.DIGITS)
+        NumberCheck.setOnClickListener{
+            if (NumberCheck.isChecked) generator.feed(PasswordGenerator.DIGITS)
+            else {
+                generator.clear()
+                //영어 체크해서 넣어주기
+            }
+        }
 
         /*
         var SpecChar = listOf()

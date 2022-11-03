@@ -20,9 +20,9 @@ class PasswordSave  : AppCompatActivity() {
         val site = findViewById<TextView>(R.id.site)
         val password_list = findViewById<ListView>(R.id.password_list)
 
-        password.text = intent.getStringExtra("password").toString()
-        id.text = intent.getStringExtra("site").toString()
-        site.text = intent.getStringExtra("id").toString()
+        intent.getStringExtra("password")
+        intent.getStringExtra("site")
+        intent.getStringExtra("id")
 
         val saveListAdapter = SaveListAdapter(this, saveList)
         password_list.adapter = saveListAdapter

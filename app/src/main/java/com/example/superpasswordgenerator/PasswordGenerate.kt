@@ -130,6 +130,3 @@ class PasswordGenerate  : AppCompatActivity(){
         }
     }
 }
-
-//TODO : 설정이 바뀌면 clear()후 처음부터 다시 추가하기
-//TODO : 특수문자 추가하기

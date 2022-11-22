@@ -56,7 +56,6 @@ class PasswordGenerate  : AppCompatActivity(){
     fun generatePassword() {
         generator.clear()
         val len = (MinV.value.toInt()..MaxV.value.toInt()).random()
-        Log.d("mytag", len.toString())
         when(rg.checkedRadioButtonId) {
             R.id.all -> {
                 generator.feed(PasswordGenerator.ALPHABET_LOWERCASE)

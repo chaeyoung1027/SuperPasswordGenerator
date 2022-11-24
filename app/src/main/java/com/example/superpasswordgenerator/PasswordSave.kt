@@ -42,6 +42,8 @@ class PasswordSave  : AppCompatActivity() {
                 Log.d("mytag", "get failed with ", exception)
             }
 
-
+    }override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

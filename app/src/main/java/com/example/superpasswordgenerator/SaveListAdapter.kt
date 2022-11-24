@@ -2,13 +2,21 @@ package com.example.superpasswordgenerator
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : BaseAdapter() {
+    val db = Firebase.firestore
+
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -17,6 +25,7 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
         val password = view.findViewById<TextView>(R.id.pw)
         val site = view.findViewById<TextView>(R.id.site)
         val id = view.findViewById<TextView>(R.id.id)
+        val delete_button = view.findViewById<ImageButton>(R.id.delete_btn)
 
         val save: Save = saveList[position]
 
@@ -24,6 +33,13 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
         site.text = save.site
         id.text = save.id
 
+        delete_button.setOnClickListener {
+            val siteURL = site.text.toString()
+            db.collection("passwords").document(siteURL + "#" + id.text.toString())
+                .delete()
+                .addOnSuccessListener { Log.d("mytag", "DocumentSnapshot successfully written!") }
+                .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
+        }
         return view
     }
 

@@ -1,13 +1,16 @@
 package com.example.superpasswordgenerator
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ListView
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import androidx.appcompat.app.AlertDialog
 
 class PasswordSave  : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
@@ -18,9 +21,6 @@ class PasswordSave  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.password_save)
 
-        val password = findViewById<TextView>(R.id.pw)
-        val id = findViewById<TextView>(R.id.id)
-        val site = findViewById<TextView>(R.id.site)
         val password_list = findViewById<ListView>(R.id.password_list)
 
         val docRef = db.collection("passwords")
@@ -42,26 +42,6 @@ class PasswordSave  : AppCompatActivity() {
                 Log.d("mytag", "get failed with ", exception)
             }
 
-        /*
-        password.text = intent.getStringExtra("password")
-        site.text = intent.getStringExtra("site")
-        id.text = intent.getStringExtra("id")
 
-        saveList = arrayListOf<Save>()
-
-        val saveListAdapter = SaveListAdapter(this, saveList)
-        password_list.adapter = saveListAdapter
-
-
-        val docRef = db.collection("passwords")
-        docRef.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    Log.d("mytag", "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("mytag", "get failed with ", exception)
-            }*/
     }
 }

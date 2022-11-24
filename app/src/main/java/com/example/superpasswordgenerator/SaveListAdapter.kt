@@ -37,9 +37,14 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
             val siteURL = site.text.toString()
             db.collection("passwords").document(siteURL + "#" + id.text.toString())
                 .delete()
-                .addOnSuccessListener { Log.d("mytag", "DocumentSnapshot successfully written!") }
+                .addOnSuccessListener {
+                    Log.d("mytag", "DocumentSnapshot successfully written!")
+                    //saveList 에서 삭제 로직 짜기
+                    notifyDataSetChanged()}
                 .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
         }
+
+
         return view
     }
 

@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/password_generate_Btn"
-        android:layout_width="184dp"
+    <ImageView
+        android:id="@+id/password_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/password"
+        android:layout_marginBottom="150dp"/>
+
+    <LinearLayout
+        android:layout_below="@id/password_icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="비밀번호 생성" />
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/password_save_Btn"
-        android:layout_width="183dp"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 목록" />
+        <ImageButton
+            android:id="@+id/password_generate_Btn"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_marginRight="20dp"
+            android:text="비밀번호 생성" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/password_save_Btn"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="20dp"
+            android:text="비밀번호 목록" />
+    </LinearLayout>
+
+</RelativeLayout>

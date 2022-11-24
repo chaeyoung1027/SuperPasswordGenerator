@@ -14,10 +14,6 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
 
         val view: View = LayoutInflater.from(context).inflate(R.layout.save_item, null)
 
-        /*var convertView = convertView
-        if (convertView == null)
-            convertView = LayoutInflater.from(parent?.context).inflate(R.layout.save_item, parent, false)*/
-
         val password = view.findViewById<TextView>(R.id.pw)
         val site = view.findViewById<TextView>(R.id.site)
         val id = view.findViewById<TextView>(R.id.id)

@@ -41,24 +41,6 @@ class PasswordManage : AppCompatActivity(){
                 }
                 .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
 
-//            val docRef = db.collection("passwords").document(siteURL + "#" + id.text.toString())
-//            docRef.get()
-//                .addOnSuccessListener { document ->
-//                    if (document != null) {
-//                        Log.d("mytag", "DocumentSnapshot data: ${document.data}")
-//                    } else {
-//                        Log.d("mytag", "No such document")
-//                    }
-//                }
-//                .addOnFailureListener { exception ->
-//                    Log.d("mytag", "get failed with ", exception)
-//                }
-//            val intent = Intent(this, PasswordSave::class.java)
-//            intent.putExtra("password",password.text.toString())
-//            intent.putExtra("site",site.text.toString())
-//            intent.putExtra("id",id.text.toString())
-//            startActivity(intent)
-
         }
 
     }

@@ -39,7 +39,7 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
                 .delete()
                 .addOnSuccessListener {
                     Log.d("mytag", "DocumentSnapshot successfully written!")
-                    //saveList 에서 삭제 로직 짜기
+                    saveList.removeAt(position)
                     notifyDataSetChanged()}
                 .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
         }

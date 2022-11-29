@@ -25,6 +25,7 @@
             android:layout_width="100dp"
             android:layout_height="130dp"
             android:layout_marginRight="20dp"
+            android:src="@drawable/generate"
             android:text="비밀번호 생성" />
 
         <ImageButton
@@ -32,6 +33,7 @@
             android:layout_width="100dp"
             android:layout_height="130dp"
             android:layout_marginLeft="20dp"
+            android:src="@drawable/save"
             android:text="비밀번호 목록" />
     </LinearLayout>
 

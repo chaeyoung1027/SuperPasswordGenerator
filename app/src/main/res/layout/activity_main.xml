@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -6,12 +7,12 @@
 
     <ImageView
         android:id="@+id/password_icon"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/password"
-        android:layout_marginBottom="150dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="130dp"
+        android:src="@drawable/password" />
 
     <LinearLayout
         android:layout_below="@id/password_icon"

@@ -30,5 +30,5 @@
 
 
 ## 💻Develpoed by
-[인소리] (https://github.com/Insori) <br/>
-[임채영] (https://github.com/chaeyoung1027) <br/>
+- [인소리](https://github.com/Insori)
+- [임채영](https://github.com/chaeyoung1027)

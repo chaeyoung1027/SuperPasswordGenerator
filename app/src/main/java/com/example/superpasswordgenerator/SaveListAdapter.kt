@@ -26,6 +26,7 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
         val site = view.findViewById<TextView>(R.id.site)
         val id = view.findViewById<TextView>(R.id.id)
         val delete_button = view.findViewById<ImageButton>(R.id.delete_btn)
+        val edit_button = view.findViewById<ImageButton>(R.id.edit_btn)
 
         val save: Save = saveList[position]
 
@@ -44,6 +45,11 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
                 .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
         }
 
+        edit_button.setOnClickListener {
+            val intent = Intent(context, PasswordManage::class.java)
+            intent.putExtra("save", save)
+            context.startActivity(intent)
+        }
 
         return view
     }

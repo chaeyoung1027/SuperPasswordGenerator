@@ -17,15 +17,15 @@
 * <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/>
 
 ## 실행화면
-### * 메인화면<br/>
+### - 메인화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205028669-95d31e7c-c191-4051-9123-53df19e3965f.png) <br/>
--비밀번호 생성화면<br/>
+### - 비밀번호 생성화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205026615-34bdc241-653b-4502-8099-cb423d43992e.png) <br/>
-- 비밀번호 저장화면<br/>
+### - 비밀번호 저장화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205029018-e6da0bd6-9fab-4e56-a601-c566eddd22b1.png) <br/>
-- 비밀번호 목록화면<br/>
+### - 비밀번호 목록화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205029081-e1666b6c-6d78-417b-a190-ff6380390cfd.png) <br/>
-- 비밀번호 수정화면<br/>
+### - 비밀번호 수정화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205029172-4055e684-1874-46e8-9fd8-ae0ed229d0f8.png) <br/>
 
 

@@ -26,7 +26,6 @@ class PasswordSave  : AppCompatActivity() {
         val docRef = db.collection("passwords")
         docRef.get()
             .addOnSuccessListener { documents ->
-
                 for (document in documents) {
                     Log.d("mytag", "${document.id} => ${document.data}")
                     var ids = document.id.split("#")
@@ -41,6 +40,7 @@ class PasswordSave  : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d("mytag", "get failed with ", exception)
             }
+
 
     }override fun onBackPressed() {
         startActivity(Intent(this, MainActivity::class.java))

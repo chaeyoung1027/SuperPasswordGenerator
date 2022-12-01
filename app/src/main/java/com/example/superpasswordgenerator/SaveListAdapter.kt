@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -49,6 +48,7 @@ class SaveListAdapter(val context: Context, val saveList: MutableList<Save>) : B
             val intent = Intent(context, PasswordManage::class.java)
             intent.putExtra("save", save)
             context.startActivity(intent)
+
         }
 
         return view

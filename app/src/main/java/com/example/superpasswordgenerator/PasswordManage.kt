@@ -24,6 +24,7 @@ class PasswordManage : AppCompatActivity(){
         val id = findViewById<EditText>(R.id.site_id)
         val save_button = findViewById<Button>(R.id.save_btn)
         val password = findViewById<TextView>(R.id.password)
+        var saveList : MutableList<Save> = mutableListOf<Save>()
 
         val save : Save? = intent.getParcelableExtra<Save>("save")
         if(save == null) {
@@ -43,7 +44,10 @@ class PasswordManage : AppCompatActivity(){
                         val intent = Intent(this, PasswordSave::class.java)
                         startActivity(intent)
                     }
+
                     .addOnFailureListener { e -> Log.w("mytag", "Error writing document", e) }
+
+
             }
         } else {
             id.isEnabled = false
@@ -61,6 +65,19 @@ class PasswordManage : AppCompatActivity(){
                         Toast.makeText(this, "수정 완료", Toast.LENGTH_SHORT).show()
                         finish()
                     }
+/*                db.collection("password").document(save.site + "#" + save.id)
+                    .addSnapshotListener { snapshot, e ->
+                        if (e != null) {
+                            Log.w("mytag", "Listen failed.", e)
+                            return@addSnapshotListener
+                        }
+
+                        if (snapshot != null && snapshot.exists()) {
+                            Log.d("mytag", "Current data: ${snapshot.data}")
+                        } else {
+                            Log.d("mytag", "Current data: null")
+                        }
+                    }*/
             }
         }
     }

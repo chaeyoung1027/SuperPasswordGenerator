@@ -8,8 +8,7 @@ data class Save(val password : String?, val site : String?, val id : String?) : 
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(password)

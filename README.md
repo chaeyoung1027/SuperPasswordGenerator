@@ -17,7 +17,7 @@
 * <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/>
 
 ## 실행화면
--메인화면<br/>
+### * 메인화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205028669-95d31e7c-c191-4051-9123-53df19e3965f.png) <br/>
 -비밀번호 생성화면<br/>
 ![image](https://user-images.githubusercontent.com/83990991/205026615-34bdc241-653b-4502-8099-cb423d43992e.png) <br/>

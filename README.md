@@ -1,7 +1,11 @@
 # SuperPasswordGenerator
 > ### Kotlin을 활용한 비밀번호 생성 앱
 > 
-* 개발 기간 : 2022.09.15~
+* 개발 기간 : 2022.09.15~2022.12.1
+
+## 프로젝트 소개
+> SuperPasswordGenerator은 랜덤 비밀번호 생성 앱 입니다. </br>
+> 비밀번호의 길이와 여러 조건들을 선택해 사진이 원하는 강한 비밀번호를 생성할 수 있습니다.</br>
 
 ## Features
 * `비밀번호 생성` : PasswordGenerate class

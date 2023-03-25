@@ -1,13 +1,17 @@
-# SuperPasswordGenerator
+# 비밀번호 생성기
 > ### Kotlin을 활용한 비밀번호 생성 앱
 > 
-* 개발 기간 : 2022.09.15~2022.12.1
+* 개발 기간 : 2022.09.15 ~ 2022.12.1
 
 ## 프로젝트 소개
 > SuperPasswordGenerator은 랜덤 비밀번호 생성 앱 입니다. </br>
 > 비밀번호의 길이와 여러 조건들을 선택해 사진이 원하는 강한 비밀번호를 생성할 수 있습니다.</br>
 
-## Features
+## 사용 언어 및 개발 도구
+<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"/>
+<img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/>
+
+## 파일 및 기능
 * `비밀번호 생성` : PasswordGenerate class
   * 비밀번호 길이와 영어, 특수문자, 숫자의 포함 유무를 선택할 수 있습니다.
   * 생성하기를 눌러 조건에 맞는 비밀번호를 생성합니다.
@@ -15,10 +19,6 @@
 * `비밀번호 목록` : PasswordSave class
   * 저장한 비밀번호의 정보를 확인 할 수 있습니다. 
   * 오른쪽 위에 있는 연필 아이콘을 클릭해 수정과 삭제가 가능합니다.
-
-## Built With
-* <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=flat-square&logo=Kotlin&logoColor=white"/>
-* <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=Android Studio&logoColor=white"/>
 
 ## 실행화면
 - ### 메인화면<br/>
@@ -34,6 +34,7 @@
    #### - 저장한 비밀번호들이 뜨고 오른쪽 위 쓰레기통 아이콘을 눌러 비밀번호를 지울 수 있습니다.
    #### - 쓰레기통 아이콘 옆 연필 아이콘을 눌러 비밀번호를 수정화면으로 이동할 수 있습니다.
 ![image](https://user-images.githubusercontent.com/83990991/205029081-e1666b6c-6d78-417b-a190-ff6380390cfd.png) <br/>
+추가 예정
 - ### 비밀번호 수정화면<br/>
    #### - 비밀번호를 원하는 것으로 바꾼 후 수정하기를 눌러 수정이 가능합니다.
 ![image](https://user-images.githubusercontent.com/83990991/205029172-4055e684-1874-46e8-9fd8-ae0ed229d0f8.png) <br/>
